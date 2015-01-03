@@ -7,7 +7,7 @@ function bindNodes(node){
   this.procs[node.name][proc.pid] = proc;
 
   returnPIDs.push(proc.pid);
-  this.procsIds[proc.pid] = {name: this.procs[node.name], proc: proc};
+  this.procsIds[proc.pid] = {nameObj: this.procs[node.name], proc: proc, name: node.name};
 
   proc.stdout.on('data', function(data){
     console.log('from :', node.name, '\n', data.toString())
@@ -48,7 +48,7 @@ NodesManager.prototype.stop = function(PID) {
   var procObj = this.procsIds[PID];
   if(procObj){
     procObj.proc.kill();
-    delete procObj.name[PID];
+    delete procObj.nameObj[PID];
     delete this.procsIds[PID];
   }
 };
@@ -57,7 +57,7 @@ NodesManager.prototype.stopAll = function() {
   for(var PID in this.procsIds){
     var curProcObj = this.procsIds[PID];
     curProcObj.proc.kill();
-    delete curProcObj.name[PID];
+    delete curProcObj.nameObj[PID];
     delete this.procsIds[PID];
   }
 };
@@ -69,12 +69,14 @@ NodesManager.prototype.listCommands = function(){
 NodesManager.prototype.listProcesses = function(){
   var list = [];
   for(var PID in this.procsIds){
+    console.log(this.procsIds[PID]);
     list.push({
       PID: PID,
       name: this.procsIds[PID].name,
       command: this.commandRegistry[this.procsIds[PID].name]
     })
   }
+  return list;
 }
 
 module.exports = NodesManager;
