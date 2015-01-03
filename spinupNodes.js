@@ -38,7 +38,9 @@ NodesManager.prototype.start = function(nodeName) {
 };
 
 NodesManager.prototype.stop = function(PID) {
-
+  if(this.procsIds[PID]){
+    this.procsIds[PID].kill();
+  }
 };
 
 NodesManager.prototype.list = function(){
