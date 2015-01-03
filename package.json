@@ -1,0 +1,21 @@
+{
+  "name": "distmanager",
+  "version": "0.0.1",
+  "description": "Tool for managing node processes on local machine.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/johnttan/distmanager.git"
+  },
+  "author": "John Tan",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/johnttan/distmanager/issues"
+  },
+  "dependencies": {
+    "hapi": "^8.0.0"
+  }
+}
