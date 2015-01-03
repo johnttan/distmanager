@@ -33,7 +33,12 @@ NodesManager.prototype.startInit = function() {
 };
 
 NodesManager.prototype.start = function(nodeName) {
-  bindNodes(this.commandRegistry[nodeName]);
+  var PID = bindNodes(this.commandRegistry[nodeName]);
+  return PID;
+};
+
+NodesManager.prototype.stop = function(PID) {
+
 };
 
 module.exports = NodesManager;

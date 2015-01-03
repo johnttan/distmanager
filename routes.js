@@ -22,7 +22,7 @@ var route = function(server, nodeManager){
       nodeManager.stop(req.params.nodeid);
       res().code(200);
     }
-  })
+  });
 };
 
 module.exports = route;
