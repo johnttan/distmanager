@@ -11,7 +11,7 @@ var route = function(server, nodeManager){
     path: '/controls/startinit',
     handler: function(req, res){
       var ids = nodeManager.startInit();
-      res(id);
+      res(ids);
     }
   });
   server.route({
