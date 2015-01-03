@@ -51,7 +51,6 @@ var route = function(server, nodeManager){
     path: '/controls/listprocesses',
     handler: function(req, res){
       var list = nodeManager.listProcesses();
-      console.log(list);
       res(list);
     }
   });
