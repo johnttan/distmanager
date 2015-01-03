@@ -11,7 +11,7 @@ function bindNodes(node){
 
   returnPIDs.push(proc.pid);
   this.procsIds[proc.pid] = proc;
-  this.procs[node.name][proc.id].stdout.on('data', function(data){
+  this.procs[node.name][proc.pid].stdout.on('data', function(data){
     console.log('from :', node.name, '\n', data.toString())
   });
   return returnPIDs;
