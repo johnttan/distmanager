@@ -14,6 +14,14 @@ var route = function(server, nodeManager){
       var id = nodeManager.start(req.params.node);
       res(id).code(200);
     };
+  });
+  server.route({
+    method: 'POST',
+    path: '/controls/stop/{nodeid}',
+    handler: function(req, res){
+      nodeManager.stop(req.params.nodeid);
+      res().code(200);
+    }
   })
 };
 
