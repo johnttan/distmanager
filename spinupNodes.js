@@ -25,3 +25,4 @@ NodesManager.prototype.startInit = function() {
   return returnPIDs;
 };
 
+module.exports = NodesManager;
