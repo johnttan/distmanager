@@ -1,13 +1,11 @@
 var spawn = require('child_process').spawn;
-var config = require('./spinupConfig');
 
-
-var SpinupManager = function(config){
+var NodesManager = function(config){
   this.config = config;
   this.procs = {};
 };
 
-SpinupManager.prototype.startInit = function() {
+NodesManager.prototype.startInit = function() {
   this.config.nodes.forEach(function(node){
     node.args = node.args || [];
     node.args[0] = this.config.rootDir + node.dir + '/' + node.args[0];
@@ -17,5 +15,3 @@ SpinupManager.prototype.startInit = function() {
     })
   }.bind(this));
 };
-
-
