@@ -40,8 +40,8 @@ var PostInput = React.createClass({
   render: function(){
     return (
         <div className="ui action input">
-          <input id={this.name}/>
-          <div className="ui button" onClick="sendPost">
+          <input onChange={this.listenChange} id={this.name}/>
+          <div className="ui button" onClick={this.sendPost}>
             {this.props.buttonText}
           </div>
         </div>
