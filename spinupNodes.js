@@ -41,4 +41,8 @@ NodesManager.prototype.stop = function(PID) {
 
 };
 
+NodesManager.prototype.list = function(){
+  return this.commandRegistry;
+};
+
 module.exports = NodesManager;

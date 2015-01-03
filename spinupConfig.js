@@ -1,4 +1,5 @@
 module.exports = {
+  port: 9001,
   rootDir: '/home/john/code',
   nodes: [
     {

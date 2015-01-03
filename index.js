@@ -1,1 +1,1 @@
-module.exports = require('./spinupNodes');
+module.exports = require('./server');

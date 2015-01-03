@@ -1,5 +1,12 @@
 var route = function(server, nodeManager){
   server.route({
+    method: 'GET',
+    path: '/',
+    handler: function(req, res){
+      res('works');
+    }
+  });
+  server.route({
     method: 'POST',
     path: '/controls/startinit',
     handler: function(req, res){
@@ -13,7 +20,7 @@ var route = function(server, nodeManager){
     handler: function(req, res){
       var id = nodeManager.start(req.params.nodename);
       res(id);
-    };
+    }
   });
   server.route({
     method: 'POST',
@@ -27,10 +34,12 @@ var route = function(server, nodeManager){
     method: 'GET',
     path: '/controls/list',
     handler: function(req, res){
+      console.log('list');
       var list = nodeManager.list();
       res(list);
     }
   });
+  console.log('routes bound');
 };
 
 module.exports = route;
