@@ -18,6 +18,10 @@ var NodesManager = function(config){
   this.config = config;
   this.procs = {};
   this.procsIds = {};
+  this.commandRegistry = {};
+  this.config.nodes.forEach(function(node){
+    this.commandRegistry[node.name] = node;
+  }.bind(this))
 };
 
 NodesManager.prototype.startInit = function() {
@@ -27,7 +31,7 @@ NodesManager.prototype.startInit = function() {
   return returnPIDs;
 };
 
-NodesManager.prototype.start = function(node) {
+NodesManager.prototype.start = function(nodeName) {
 
 };
 

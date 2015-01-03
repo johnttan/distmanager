@@ -9,9 +9,9 @@ var route = function(server, nodeManager){
   });
   server.route({
     method: 'POST',
-    path: '/controls/start/{node}',
+    path: '/controls/start/{nodename}',
     handler: function(req, res){
-      var id = nodeManager.start(req.params.node);
+      var id = nodeManager.start(req.params.nodename);
       res(id).code(200);
     };
   });
