@@ -62,8 +62,19 @@ NodesManager.prototype.stopAll = function() {
   }
 };
 
-NodesManager.prototype.list = function(){
+NodesManager.prototype.listCommands = function(){
   return this.commandRegistry;
 };
+
+NodesManager.prototype.listProcesses = function(){
+  var list = [];
+  for(var PID in this.procsIds){
+    list.push({
+      PID: PID,
+      name: this.procsIds[PID].name,
+      command: this.commandRegistry[this.procsIds[PID].name]
+    })
+  }
+}
 
 module.exports = NodesManager;

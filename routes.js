@@ -40,10 +40,17 @@ var route = function(server, nodeManager){
   });
   server.route({
     method: 'GET',
-    path: '/controls/list',
+    path: '/controls/listcommands',
     handler: function(req, res){
-      console.log('list');
-      var list = nodeManager.list();
+      var list = nodeManager.listCommands();
+      res(list);
+    }
+  });
+  server.route({
+    method: 'GET',
+    path: '/controls/listprocesses',
+    handler: function(req, res){
+      var list = nodeManager.listProcesses();
       res(list);
     }
   });
