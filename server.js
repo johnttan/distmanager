@@ -1,13 +1,20 @@
 var Hapi = require('hapi');
 var NodeManager = require('./spinupNodes');
 var route = require('./routes');
+var socketio = require('socket.io');
 
 var NodesServer = function(config){
   this.config = config;
-  this.nodeManager = new NodeManager(config);
+
   this.server = new Hapi.Server();
   this.server.connection({port: config.port});
+
+  var io = socketio(this.server.listener);
+  this.procsNsp = io.of('/processes')
+
+  this.nodeManager = new NodeManager(config, this.procsNsp);
   route(this.server, this.nodeManager);
+
   console.log('server setup');
 };
 

@@ -10,9 +10,11 @@ function bindNodes(node){
   this.procsIds[proc.pid] = {nameObj: this.procs[node.name], proc: proc, name: node.name};
 
   proc.stdout.on('data', function(data){
+    this.procsIds[proc.pid].stdout = data.toString();
     console.log('from :', node.name, '\n', data.toString())
   });
   proc.stderr.on('data', function(data){
+    this.procsIds[proc.pid].stderr = data.toString();
     console.log('error :', node.name, '\n', data.toString())
   });
   proc.stdout.on('close', function(data){
@@ -22,7 +24,7 @@ function bindNodes(node){
   return returnPIDs;
 };
 
-var NodesManager = function(config){
+var NodesManager = function(config, procsNsp){
   this.config = config;
   this.procs = {};
   this.procsIds = {};
@@ -31,7 +33,13 @@ var NodesManager = function(config){
     node.args = node.args || [];
     node.args[0] = this.config.rootDir + node.dir + '/' + node.args[0];
     this.commandRegistry[node.name] = node;
-  }.bind(this))
+  }.bind(this));
+
+  this.socketStream = procsNsp;
+};
+
+NodesManager.prototype.broadcastProcesses = function(){
+  this.socketStream.emit('data', this.procsIds);
 };
 
 NodesManager.prototype.startInit = function() {
