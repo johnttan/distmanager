@@ -4,7 +4,7 @@ var route = function(server, nodeManager){
     path: '/controls/startinit',
     handler: function(req, res){
       var ids = nodeManager.startInit();
-      res(id).code(200);
+      res(id);
     }
   });
   server.route({
@@ -12,7 +12,7 @@ var route = function(server, nodeManager){
     path: '/controls/start/{nodename}',
     handler: function(req, res){
       var id = nodeManager.start(req.params.nodename);
-      res(id).code(200);
+      res(id);
     };
   });
   server.route({
@@ -20,7 +20,15 @@ var route = function(server, nodeManager){
     path: '/controls/stop/{nodeid}',
     handler: function(req, res){
       nodeManager.stop(req.params.nodeid);
-      res().code(200);
+      res();
+    }
+  });
+  server.route({
+    method: 'GET',
+    path: '/controls/list',
+    handler: function(req, res){
+      var list = nodeManager.list();
+      res(list);
     }
   });
 };
