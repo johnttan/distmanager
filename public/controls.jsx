@@ -20,6 +20,9 @@ var PostButton = React.createClass({
 });
 
 var PostInput = React.createClass({
+  getInitialState: function(){
+    return {input: this.props.nodeId}
+  },
   sendPost: function(){
     if(this.state.input){
       var url = this.props.url + this.state.input;
@@ -38,16 +41,20 @@ var PostInput = React.createClass({
     this.setState({input:e.target.value})
   },
   render: function(){
+    var result;
+    if(!this.props.nodeId){
+      result = <input onChange={this.listenChange} id={this.name}/>
+    }
     return (
         <div className="ui action input">
-          <input onChange={this.listenChange} id={this.name}/>
+          {result}
           <div className="ui button" onClick={this.sendPost}>
             {this.props.buttonText}
           </div>
         </div>
       )
   }
-})
+});
 
 React.render(
   <PostButton url="controls/startinit" buttonText="Start Initial Nodes"/>,

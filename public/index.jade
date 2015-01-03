@@ -1,5 +1,5 @@
 doctype html
-html(lang="en")
+html(lang="en" ng-app="app")
   head
     title Nodes Manager
     link(rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.5.2/semantic.css")
@@ -7,21 +7,26 @@ html(lang="en")
     script(src="https://cdnjs.cloudflare.com/ajax/libs/react/0.12.2/react.js")
     script(src="https://cdnjs.cloudflare.com/ajax/libs/react/0.12.2/JSXTransformer.js")
     script(src="https://cdn.socket.io/socket.io-1.2.1.js")
+    script(src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.5/angular.min.js")
+    script(src="app.js")
+    script(src="controllers.js")
+    script(src="services.js")
   body
     .ui.raised.segment
       span#startInit
       span#stopAll
-      .ui.segment#startNode
+      span#startNode
         .ui.action.input
           input
           .ui.button Start Node
-      .ui.segment#stopNode
+      span#stopNode
         .ui.action.input
           input
           .ui.button Stop Node
     .ui.segment#commandList
     .ui.segment
       .ui.header Processes
-    script(type="text/jsx" src="app.js")
+      div#processes(ng-controller="ProcessesCtrl")
+        |{{test}}
     script(type="text/jsx" src="commands.jsx")
     script(type="text/jsx" src="controls.jsx")
