@@ -1,7 +1,7 @@
 var CommandsList = React.createClass({
   getInitialState: function(){
     console.log('initializing')
-    return {commands: []}
+    return {commands: [], style:{visibility: 'visible'}}
   },
   loadCommands: function(){
     $.ajax({
@@ -19,6 +19,10 @@ var CommandsList = React.createClass({
   componentDidMount: function(){
     this.loadCommands();
   },
+  handleClick: function(){
+    var visibility = this.state.style.visibility === 'visible' ? 'hidden' : 'visible';
+    this.setState({style:{visibility:visibility}});
+  },
   render: function(){
     var commandNodes = [];
     for(var name in this.state.commands){
@@ -29,8 +33,17 @@ var CommandsList = React.createClass({
       )
     }
     return (
-      <div className="commands ui list">
-        {commandNodes}
+      <div>
+        <div className="ui header">
+          List of Commands
+          <div onClick={this.handleClick} className="ui red inverted right attached button">
+            Show
+          </div>
+        </div>
+
+        <div style={this.state.style} className="commands ui list">
+          {commandNodes}
+        </div>
       </div>
     )
   }
