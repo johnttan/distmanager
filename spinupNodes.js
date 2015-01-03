@@ -2,19 +2,20 @@ var spawn = require('child_process').spawn;
 
 function bindNodes(node){
   var returnPIDs = [];
-  console.log(node);
-  node.args = node.args || [];
-  node.args[0] = this.config.rootDir + node.dir + '/' + node.args[0];
   var proc = spawn('node', node.args);
   this.procs[node.name] = this.procs[node.name] || {};
   this.procs[node.name][proc.pid] = proc;
 
   returnPIDs.push(proc.pid);
   this.procsIds[proc.pid] = {name: this.procs[node.name], proc: proc};
-  this.procsIds[proc.pid].proc.stdout.on('data', function(data){
+
+  proc.stdout.on('data', function(data){
     console.log('from :', node.name, '\n', data.toString())
   });
-  this.procsIds[proc.pid].proc.stdout.on('close', function(data){
+  proc.stderr.on('data', function(data){
+    console.log('error :', node.name, '\n', data.toString())
+  });
+  proc.stdout.on('close', function(data){
     console.log('exited :', node.name, '\n', data.toString())
   });
 
@@ -27,6 +28,8 @@ var NodesManager = function(config){
   this.procsIds = {};
   this.commandRegistry = {};
   this.config.nodes.forEach(function(node){
+    node.args = node.args || [];
+    node.args[0] = this.config.rootDir + node.dir + '/' + node.args[0];
     this.commandRegistry[node.name] = node;
   }.bind(this))
 };
@@ -51,10 +54,10 @@ NodesManager.prototype.stop = function(PID) {
 };
 
 NodesManager.prototype.stopAll = function() {
-  for(var procId in this.procsIds){
-    var curProcObj = this.procsIds[procId];
+  for(var PID in this.procsIds){
+    var curProcObj = this.procsIds[PID];
     curProcObj.proc.kill();
-    delete procObj.name[PID];
+    delete curProcObj.name[PID];
     delete this.procsIds[PID];
   }
 };

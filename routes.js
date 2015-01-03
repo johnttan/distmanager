@@ -30,6 +30,14 @@ var route = function(server, nodeManager){
       res();
     }
   });
+    server.route({
+    method: 'POST',
+    path: '/controls/stopall',
+    handler: function(req, res){
+      nodeManager.stopAll();
+      res();
+    }
+  });
   server.route({
     method: 'GET',
     path: '/controls/list',
