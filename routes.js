@@ -1,9 +1,12 @@
 var route = function(server, nodeManager){
   server.route({
     method: 'GET',
-    path: '/',
-    handler: function(req, res){
-      res('works');
+    path: '/{param*}',
+    handler: {
+        directory: {
+            path: 'public',
+            index: true
+        }
     }
   });
   server.route({
