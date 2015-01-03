@@ -1,5 +1,14 @@
-var app = angular.module('app', []);
+var app = angular.module('app');
 
-app.factory('ProcessesService', function(){
-
+app.factory('Processes', function(){
+  var store = {
+    test: 'test'
+  };
+  var procStream = io('/processes');
+  procStream.on('data', function(data){
+    for(var key in data){
+      store[key] = data[key];
+    }
+  });
+  return store;
 });

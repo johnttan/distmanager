@@ -9,8 +9,8 @@ html(lang="en" ng-app="app")
     script(src="https://cdn.socket.io/socket.io-1.2.1.js")
     script(src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.5/angular.min.js")
     script(src="app.js")
-    script(src="controllers.js")
     script(src="services.js")
+    script(src="controllers.js")
   body
     .ui.raised.segment
       span#startInit
@@ -27,6 +27,6 @@ html(lang="en" ng-app="app")
     .ui.segment
       .ui.header Processes
       div#processes(ng-controller="ProcessesCtrl")
-        |{{test}}
+        div(ng-repeat="(key, proc) in processes") {{key}} {{proc}}
     script(type="text/jsx" src="commands.jsx")
     script(type="text/jsx" src="controls.jsx")
