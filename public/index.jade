@@ -14,18 +14,15 @@ html(lang="en" ng-app="app")
   body
     .ui.raised.segment
       .ui.grid
-        .two.wide.column
+        .one.wide.column
           span#startInit
+        .one.wide.column
           span#stopAll
+        .four.wide.column
           span#startNode
-            .ui.action.input
-              input
-              .ui.button Start Node
+        .four.wide.column
           span#stopNode
-            .ui.action.input
-              input
-              .ui.button Stop Node
-        .fourteen.wide.column
+        .six.wide.column
           .ui.segment#commandList
     .ui.segment
       .ui.header Processes
@@ -33,8 +30,8 @@ html(lang="en" ng-app="app")
         .item(ng-repeat="(key, proc) in processes.data")
           .ui.left.floated.ui.red.compact.button(ng-click="stopNode(key)") STOP
           .ui.right.attached.tiny.button(ng-click="showLogs = !showLogs") Logs
+          .ui.small.header {{proc.name}} | PID {{key}}
           .content
-            .ui.small.header {{proc.name}} | PID {{key}}
             pre OUT: {{proc.stdout.time | date:'mediumTime'}}:{{proc.stdout.data}}
             pre(ng-show="proc.stderr") ERROR: {{proc.stderr}}
           pre(ng-show="showLogs") {{processes.stringHistory[key]}}
