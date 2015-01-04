@@ -32,14 +32,15 @@ html(lang="en" ng-app="app")
       .ui.mini.celled.list#processes(ng-controller="ProcessesCtrl")
         .item(ng-repeat="(key, proc) in processes.data")
           .ui.left.floated.ui.red.compact.button(ng-click="stopNode(key)") STOP
+          .ui.right.attached.tiny.button(ng-click="showLogs = !showLogs") Logs
           .content
             .ui.small.header {{proc.name}} | PID {{key}}
             pre OUT: {{proc.stdout.time | date:'mediumTime'}}:{{proc.stdout.data}}
-            pre ERROR: {{proc.stderr}}
-          .ui.button(ng-click="showLogs = !showLogs") Show Logs
-          div(ng-show="showLogs")
-            .ui.small.header Logs
-            .ui.huge.list
-              .item(ng-repeat="stdout2 in processes.history[key] | orderBy:'time':'true'") {{stdout2.time | date:'mediumTime'}}:  {{stdout2.data}}
+            pre(ng-show="proc.stderr") ERROR: {{proc.stderr}}
+          pre(ng-show="showLogs") {{processes.stringHistory[key]}}
+          //- div(ng-show="showLogs")
+          //-   .ui.small.header Logs
+          //-   .ui.huge.list
+          //-     .item(ng-repeat="stdout2 in processes.history[key] | orderBy:'time':'true'") {{stdout2.time | date:'mediumTime'}}:  {{stdout2.data}}
     script(type="text/jsx" src="commands.jsx")
     script(type="text/jsx" src="controls.jsx")

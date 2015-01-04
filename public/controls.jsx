@@ -12,7 +12,7 @@ var PostButton = React.createClass({
   },
   render: function(){
     return (
-      <div onClick={this.sendRequest} className="ui button">
+      <div onClick={this.sendRequest} className="ui tiny button">
         {this.props.buttonText}
       </div>
       )
@@ -46,9 +46,9 @@ var PostInput = React.createClass({
       result = <input onChange={this.listenChange} id={this.name}/>
     }
     return (
-        <div className="ui action input">
+        <div className="ui tiny action input">
           {result}
-          <div className="ui button" onClick={this.sendPost}>
+          <div className="ui tiny button" onClick={this.sendPost}>
             {this.props.buttonText}
           </div>
         </div>
