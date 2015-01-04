@@ -1,6 +1,6 @@
 var Hapi = require('hapi');
-var NodeManager = require('./spinupNodes');
-var route = require('./routes');
+var NodeManager = require(__dirname + '/spinupNodes');
+var route = require(__dirname + '/routes');
 var socketio = require('socket.io');
 
 var NodesServer = function(config){

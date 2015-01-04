@@ -4,7 +4,7 @@ var route = function(server, nodeManager){
     path: '/{param*}',
     handler: {
         directory: {
-            path: 'public',
+            path: __dirname + '/public',
             index: true
         }
     }
