@@ -1,6 +1,6 @@
 {
   "name": "distmanager",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Tool for managing node processes on local machine.",
   "main": "index.js",
   "scripts": {
