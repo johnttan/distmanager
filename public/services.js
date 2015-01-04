@@ -1,18 +1,14 @@
 var app = angular.module('app');
 
 app.factory('Processes', function(){
-  var store = {
-    storeApply: function(apply){
-      this.apply = apply;
-    }
+  var store = {};
+  return function(apply){
+    var procStream = io('/processes');
+    procStream.on('data', function(data){
+      console.log('data', data);
+      store.data = data;
+      apply();
+    });
+    return store
   };
-  var procStream = io('/processes');
-  procStream.on('data', function(data){
-    console.log('data', data);
-    for(var key in data){
-      store[key] = data[key];
-    };
-    store.apply();
-  });
-  return store;
 });

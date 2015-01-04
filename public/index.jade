@@ -13,25 +13,28 @@ html(lang="en" ng-app="app")
     script(src="controllers.js")
   body
     .ui.raised.segment
-      span#startInit
-      span#stopAll
-      span#startNode
-        .ui.action.input
-          input
-          .ui.button Start Node
-      span#stopNode
-        .ui.action.input
-          input
-          .ui.button Stop Node
-    .ui.segment#commandList
+      .ui.grid
+        .two.wide.column
+          span#startInit
+          span#stopAll
+          span#startNode
+            .ui.action.input
+              input
+              .ui.button Start Node
+          span#stopNode
+            .ui.action.input
+              input
+              .ui.button Stop Node
+        .fourteen.wide.column
+          .ui.segment#commandList
     .ui.segment
       .ui.header Processes
-      div#processes(ng-controller="ProcessesCtrl")
-        div(ng-repeat="(key, proc) in processes")
-          .ui.small.header Name {{proc.name}} | PID {{key}} |
-          span.ui.header OUT: {{proc.stdout}}
-          .ui.small.header error
-          div {{proc.stderr}}
-          .ui.divider
+      .ui.mini.celled.list#processes(ng-controller="ProcessesCtrl")
+        .item(ng-repeat="(key, proc) in processes.data")
+          .ui.left.floated.ui.red.compact.button(ng-click="stopNode(key)") STOP
+          .content
+            .ui.small.header {{proc.name}} | PID {{key}}
+            pre OUT: {{proc.stdout}}
+            pre ERROR: {{proc.stderr}}
     script(type="text/jsx" src="commands.jsx")
     script(type="text/jsx" src="controls.jsx")

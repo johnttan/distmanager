@@ -69,16 +69,14 @@ NodesManager.prototype.stop = function(PID) {
     procObj.proc.kill();
     delete procObj.nameObj[PID];
     delete this.procsIds[PID];
+    delete this.procsReport[PID];
   }
   this.broadcast();
 };
 
 NodesManager.prototype.stopAll = function() {
   for(var PID in this.procsIds){
-    var curProcObj = this.procsIds[PID];
-    curProcObj.proc.kill();
-    delete curProcObj.nameObj[PID];
-    delete this.procsIds[PID];
+    this.stop(PID);
   }
   this.broadcast();
 };

@@ -1,7 +1,7 @@
 var CommandsList = React.createClass({
   getInitialState: function(){
     console.log('initializing')
-    return {commands: [], visible:true}
+    return {commands: [], visible:false}
   },
   loadCommands: function(){
     $.ajax({
