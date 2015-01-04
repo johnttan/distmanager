@@ -27,6 +27,11 @@ html(lang="en" ng-app="app")
     .ui.segment
       .ui.header Processes
       div#processes(ng-controller="ProcessesCtrl")
-        div(ng-repeat="(key, proc) in processes") {{key}} {{proc}}
+        div(ng-repeat="(key, proc) in processes")
+          .ui.small.header Name {{proc.name}} | PID {{key}} |
+          span.ui.header OUT: {{proc.stdout}}
+          .ui.small.header error
+          div {{proc.stderr}}
+          .ui.divider
     script(type="text/jsx" src="commands.jsx")
     script(type="text/jsx" src="controls.jsx")
