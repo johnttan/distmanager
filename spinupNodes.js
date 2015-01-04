@@ -10,14 +10,14 @@ function bindNodes(node){
   this.procsIds[proc.pid] = {nameObj: this.procs[node.name], proc: proc, name: node.name};
 
   proc.stdout.on('data', function(data){
-    this.procsReport[proc.pid].stdout = data.toString();
+    this.procsReport[proc.pid].stdout = {time: Date.now(), data:data.toString()};
     this.procsReport[proc.pid].name = node.name
     this.procsReport[proc.pid].pid = proc.pid
     this.broadcast();
     console.log('from :', node.name, '\n', data.toString())
   }.bind(this));
   proc.stderr.on('data', function(data){
-    this.procsReport[proc.pid].stderr = data.toString();
+    this.procsReport[proc.pid].stderr = {time: Date.now(), data:data.toString()};
     this.procsReport[proc.pid].name = node.name
     this.procsReport[proc.pid].pid = proc.pid
     this.broadcast();
