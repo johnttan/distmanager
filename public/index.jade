@@ -28,10 +28,10 @@ html(lang="en" ng-app="app")
       .ui.header Processes
       .ui.mini.celled.list#processes(ng-controller="ProcessesCtrl")
         .item(ng-repeat="(key, proc) in processes.data")
-          .ui.left.floated.ui.red.compact.button(ng-click="restartNode(key)") RESTART
+          .ui.header {{proc.name}} | PID {{key}}
+          .ui.left.floated.ui.green.compact.button(ng-click="restartNode(key)") RESTART
           .ui.left.floated.ui.red.compact.button(ng-click="stopNode(key)") STOP
           .ui.right.attached.tiny.button(ng-click="showLogs = !showLogs") Logs
-          .ui.small.header {{proc.name}} | PID {{key}}
           .content
             pre OUT: {{proc.stdout.time | date:'mediumTime'}}:{{proc.stdout.data}}
             pre(ng-show="proc.stderr") ERROR: {{proc.stderr}}
