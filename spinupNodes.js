@@ -63,6 +63,12 @@ NodesManager.prototype.start = function(nodeName) {
   return PID;
 };
 
+NodesManager.prototype.restart = function(PID){
+  var nodeName = this.procsIds[PID].name;
+  this.stop(PID);
+  this.start(nodeName);
+};
+
 NodesManager.prototype.stop = function(PID) {
   var procObj = this.procsIds[PID];
   if(procObj){
